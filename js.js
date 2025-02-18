@@ -85,6 +85,7 @@ function showToDo() {
 
     if (task.done) {
       li.classList.add("completed");
+
       completedListQsl.appendChild(li);
     } else {
       toDoListQsl.appendChild(li);
@@ -92,6 +93,7 @@ function showToDo() {
 
     li.querySelector(".mark_toggle_done").addEventListener("click", () => {
       task.done = !task.done;
+
       showToDo();
       console.log("taskArray", taskArr);
     });

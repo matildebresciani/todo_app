@@ -2,13 +2,19 @@
     --bg-color: #8BA49A;
     --primary-color: #E2DFDA;
     --border-color: #c5c3be;
+    --button-border: white;
+    --marked-done: #6a7b74;
+    --mark-done-hover: #8BA49A;
+    --grey-hover: #e2e2e2;
+    --delete1: #73221c;
+    --delete2: #CA3433;
     --white: #f2efed;
-    --farve1: red;
     --font1: "Roboto Mono", serif;
     --transition-hover: ease 0.4s;
     font-family: var(--font1);
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -20,9 +26,9 @@ body {
 
 main {
     background-color: var(--primary-color);
-    width: 350px;
+    width: 450px;
     padding: 2rem;
-    border: 2px solid var(--border-color);
+    border: 4px solid var(--border-color);
     border-radius: 20px;
     margin: 2rem;
 }
@@ -44,6 +50,7 @@ button, input {
 button {
     color: black;
     transition: var(--transition-hover);
+    background-color: var(--white);
 }
 
 /* ALT INDHOLD I MIN TASK LI */
@@ -79,10 +86,7 @@ li:last-child {
 }
 
 /* Input felter styling */
-.amount_input {
-    width: 50px;
-    height: 20px;
-}
+
 
 .text_input, .new_task_input {
     color: rgb(71, 71, 71);
@@ -141,6 +145,7 @@ justify-content: center;
     margin-left: 15px;
   }
   
+
   .amount_input{
     -moz-appearance: textfield; /* Fjern piletaster i Firefox */
     -webkit-appearance: none; /* Fjern piletaster i WebKit-browsere (Chrome, Safari) */
@@ -168,7 +173,7 @@ justify-content: center;
 
   
   .amount-container button {
-    background-color: #f0f0f0;
+    background-color: var(--white);
     border: none;
     cursor: pointer;
     font-size: 14px;
@@ -184,7 +189,7 @@ justify-content: center;
 }
   
   .amount-container button:hover {
-    background-color: #e0e0e0;
+    background-color: var(--grey-hover);
   }
   
 
@@ -207,7 +212,8 @@ justify-content: center;
 }
 
 .delete_button {
-    border: solid black 2px;
+    border: solid var(--delete1) 2px;
+    color: var(--delete1);
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -219,33 +225,55 @@ justify-content: center;
     padding-bottom: 2px;
 }
 
+.delete_button:hover {
+    background-color: var(--delete2);
+    color: var(--white);
+}
 
 
 .mark_toggle_done {
     appearance: none; 
     width: 20px;
     height: 20px;
-    border: 2px solid black;
+    border: 2px solid var(--marked-done);
     border-radius: 50%; 
     background-color: var(--white);
     transition: var(--transition-hover);
 }
 
+.mark_toggle_done::before {
+    content: "";
+    width: 14px; /* Størrelse af indre cirkel */
+    height: 14px;
+    border: 1px solid var(--white); /* Inner border */
+    border-radius: 50%;
+    position: absolute;
+    background-color: transparent;
+    transition: var(--transition-hover);
+}
+
 .mark_toggle_done:hover {
-    background-color: rgb(248, 104, 104);
+    background-color: var(--mark-done-hover);
 }
 
 .mark_toggle_done:checked {
-    background-color: red;
+    background-color: var(--marked-done);
 }
 .mark_toggle_done:checked:hover {
-    background-color: rgb(248, 104, 104);
+    background-color: var(--mark-done-hover);
 }
 
 .add_task_button {
-    border: solid black 2px  ;
+    border: solid var(--border-color) 2px  ;
     border-radius: 5px;
-    padding: 2px 7px;
+    padding: 0px 7px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.add_task_button:hover {
+    background-color: #e2e2e2;
 }
 
 
@@ -258,5 +286,35 @@ justify-content: center;
 
 
 /* Animationer */
+@keyframes slideOutToBottom {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+  }
+  
+  @keyframes slideInFromTop {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
 
+  .slideIn-animation {
+    animation: slideInFromTop 0.5s forwards;
+  }
+  
 
+  .slideOut-animation {
+    animation: slideOutToBottom 0.5s forwards;
+  }
+  
