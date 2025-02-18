@@ -149,6 +149,7 @@ justify-content: center;
     text-align: center;
     font-size: 12px;
     border: none;
+    border-radius: 0px;
     background-color: var(--white);
   }
 
