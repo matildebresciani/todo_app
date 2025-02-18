@@ -1,0 +1,260 @@
+* {
+    --bg-color: #8BA49A;
+    --primary-color: #E2DFDA;
+    --border-color: #c5c3be;
+    --white: #f2efed;
+    --farve1: red;
+    --font1: "Roboto Mono", serif;
+    --transition-hover: ease 0.4s;
+    font-family: var(--font1);
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    display: grid;
+    justify-content: center;
+}
+
+
+main {
+    background-color: var(--primary-color);
+    width: 350px;
+    padding: 2rem;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    margin: 2rem;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 2rem;
+    color: #fffcf9;
+}
+
+h2 {
+    font-weight: 450;
+}
+
+button, input {
+    cursor: pointer;
+}
+
+button {
+    transition: var(--transition-hover);
+}
+
+/* ALT INDHOLD I MIN TASK LI */
+.li_container {
+    min-width: 300px;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between ;
+    align-items:center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--border-color);
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+.li_elm_1 {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    margin-bottom: 10px;
+    
+}
+
+/* Input felter styling */
+.amount_input {
+    width: 50px;
+    height: 20px;
+}
+
+.text_input, .new_task_input {
+    color: rgb(71, 71, 71);
+    border: none;
+    font-size: 16px;
+    background-color: transparent;
+    margin-left: 10px;
+    cursor: auto;
+    min-width: 150px;
+    
+}
+
+.new_task_container {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.new_task_input {
+    border: none;
+}
+
+.date_input {
+    border: transparent;
+    border-radius: 5px;
+    background: rgb(231, 231, 231);
+    font-size: 12px;
+    color: grey;
+    width: auto;
+    cursor: pointer;
+    text-align: left;
+    padding: 3px;
+}
+
+.date_input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.date_input:empty::before {
+    content: "Vælg dato";
+    color: lightgrey;
+}
+
+.date_input:focus {
+    outline: none;
+    color: black;
+}
+
+#completed_tasks_container {
+    margin-top: 2rem;
+}
+
+.amount-container {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+  }
+  
+  .amount_input{
+    -moz-appearance: textfield; /* Fjern piletaster i Firefox */
+    -webkit-appearance: none; /* Fjern piletaster i WebKit-browsere (Chrome, Safari) */
+    appearance: none; /* Fjern piletaster i moderne browsere */
+    width: 30px;
+    height: 20px;
+    text-align: center;
+    font-size: 12px;
+    border: none;
+    background-color: var(--white);
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+  
+  /* Fjerner piletasterne i Firefox */
+  
+  input[type="number"] {
+      -moz-appearance: textfield;  
+  }
+
+  
+  .amount-container button {
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 5px;
+    height: 20px;
+  }
+  .amount-container button:first-child {
+      border-radius: 5px 0px 0px 5px;
+  }
+
+  .amount-container button:last-child {
+    border-radius: 0px 5px 5px 0px;
+}
+  
+  .amount-container button:hover {
+    background-color: #e0e0e0;
+  }
+  
+
+
+/* Knapper */
+
+.plus_sign {
+    border: none;
+    background-color: transparent;
+    font-size: 25px;
+    width: 20px;
+}
+
+.plus_sign:hover {
+    color: grey;
+}
+
+.button_container {
+    margin-left: 15px;
+}
+
+.delete_button {
+    border: solid black 2px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    padding-bottom: 2px;
+}
+
+
+
+.mark_toggle_done {
+    appearance: none; 
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 50%; 
+    background-color: var(--white);
+    transition: var(--transition-hover);
+}
+
+.mark_toggle_done:hover {
+    background-color: rgb(248, 104, 104);
+}
+
+.mark_toggle_done:checked {
+    background-color: red;
+}
+.mark_toggle_done:checked:hover {
+    background-color: rgb(248, 104, 104);
+}
+
+.add_task_button {
+    border: solid black 2px  ;
+    border-radius: 5px;
+    padding: 2px 7px;
+}
+
+
+
+/* Classes der tilføjes i javascript */
+.completed .text_input{
+    color: grey;
+    text-decoration: line-through;
+}
+
+
+/* Animationer */
+
+
