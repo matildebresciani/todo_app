@@ -60,42 +60,58 @@ function showToDo() {
   </div>
 `;
 
-    // Event listeners for minus and plus buttons
-    const minusBtn = li.querySelector(".minus-btn");
-    const plusBtn = li.querySelector(".plus-btn");
-    const amountInput = li.querySelector(".amount_input");
+    // Event listeners til plus og minus knapper
+    const minusBtn = li.querySelector(".minus-btn"); //Minus knap
+    const plusBtn = li.querySelector(".plus-btn"); //Plus knap
+    const amountInput = li.querySelector(".amount_input"); //Inputfelt hvor tal vises
 
     minusBtn.addEventListener("click", () => {
-      let currentValue = parseInt(amountInput.value, 10);
+      let currentValue = parseInt(amountInput.value, 10); //Sikrer at værdi er hele tal
       if (!isNaN(currentValue) && currentValue > 0) {
-        currentValue--; // Decrease value
-        amountInput.value = currentValue;
-        task.antal = currentValue; // Update task array
-        localStorage.setItem("storedTasks", JSON.stringify(taskArr)); // Save changes to localStorage
+        //Tjekker om værdien er et tal og større end 0
+        currentValue--; //Reducerer tallet med 1
+        amountInput.value = currentValue; //Opdaterer input feltet til den nye værdi
+        task.antal = currentValue; // Opdaterer array til nuværende tal
+        localStorage.setItem("storedTasks", JSON.stringify(taskArr));
       }
     });
 
     plusBtn.addEventListener("click", () => {
       let currentValue = parseInt(amountInput.value, 10);
-      currentValue++; // Increase value
+      currentValue++; // Øger tallet med 1
       amountInput.value = currentValue;
-      task.antal = currentValue; // Update task array
-      localStorage.setItem("storedTasks", JSON.stringify(taskArr)); // Save changes to localStorage
+      task.antal = currentValue; // Opdaterer array til nuværende tal
+      localStorage.setItem("storedTasks", JSON.stringify(taskArr));
     });
 
     if (task.done) {
       li.classList.add("completed");
-
       completedListQsl.appendChild(li);
     } else {
       toDoListQsl.appendChild(li);
     }
 
-    li.querySelector(".mark_toggle_done").addEventListener("click", () => {
+    li.querySelector(".mark_toggle_done").addEventListener("click", (evt) => {
+      //Toggler task.done mellem true (færdig) og false (ikke færdig)
+      //Bruges til at flytte task mellem to do og completed
       task.done = !task.done;
 
-      showToDo();
-      console.log("taskArray", taskArr);
+      // Finder <li>-elementet der er parent til den checkbox
+      // man har trykket på, så den tilføjer animation til hele den <li>
+      const liElement = evt.target.closest("li");
+
+      //Hvis task markeres som færdig, tilføjes animation
+      if (task.done) {
+        liElement.classList.add("slideOut-animation");
+      }
+
+      // Vent på, at animationen er færdig, og flyt derefter elementet
+      const animationDuration = 500; // Samme tid som i CSS
+
+      setTimeout(() => {
+        //Opdaterer to do liste
+        showToDo();
+      }, animationDuration); // Vent på at animationen slutter, før elementet flyttes
     });
 
     li.querySelector(".text_input").addEventListener("input", (evt) => {
@@ -115,8 +131,14 @@ function showToDo() {
     });
 
     li.querySelector(".delete_button").addEventListener("click", () => {
-      taskArr = taskArr.filter((t) => t.id !== task.id);
-      showToDo();
+      li.classList.add("delete-animation");
+
+      const animationDuration = 500;
+
+      setTimeout(() => {
+        taskArr = taskArr.filter((t) => t.id !== task.id);
+        showToDo();
+      }, animationDuration);
     });
   });
 
@@ -151,10 +173,6 @@ function addTaskInput() {
 
     toDoListQsl.appendChild(newTaskDiv);
 
-    const taskInput = newTaskDiv.querySelector(".new_task_input");
-    const amountInput = newTaskDiv.querySelector(".amount_input");
-    const dateInput = newTaskDiv.querySelector(".date_input");
-
     // Add event listeners to the plus/minus buttons for the new task
     const minusBtn = newTaskDiv.querySelector(".minus-btn");
     const plusBtn = newTaskDiv.querySelector(".plus-btn");
@@ -173,19 +191,20 @@ function addTaskInput() {
       amountInput.value = currentValue;
     });
 
+    const taskInput = newTaskDiv.querySelector(".new_task_input");
+    const amountInput = newTaskDiv.querySelector(".amount_input");
+    const dateInput = newTaskDiv.querySelector(".date_input");
+
     const addTask = () => {
-      console.log("ADD TASK");
       if (taskInput.value.trim() !== "") {
         taskArr.push({
-          id: self.crypto.randomUUID(),
-          text: taskInput.value,
-          antal: amountInput.value,
-          date: dateInput.value,
-          done: false,
+          id: self.crypto.randomUUID(), //Generer et unikt ID til task
+          text: taskInput.value, //Henter den indtastede tekst
+          antal: amountInput.value, //Henter det indtastede antal
+          date: dateInput.value, //Henter den indtastede dato
+          done: false, //Sørger for at task starter som ikke færdig
         });
         showToDo();
-        console.log("dateInput", dateInput);
-        console.log("dato value", dateInput.value);
       }
     };
 
